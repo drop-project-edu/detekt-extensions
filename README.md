@@ -12,7 +12,7 @@ Include the following dependency on your pom file:
     <dependency>
 	    <groupId>pt.ulusofona.deisi</groupId>
 	    <artifactId>drop-project-detekt-extensions</artifactId>
-	    <version>0.1.1</version>
+	    <version>0.1.2</version>
 	</dependency>
 	
 Add this configuration to detekt.yml:
