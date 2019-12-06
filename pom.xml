@@ -13,6 +13,14 @@
     <description>Several custom rules for detekt to be used by Drop Project</description>
     <url>https://github.com/drop-project-edu/detekt-extensions</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <scm>
         <url>https://github.com/drop-project-edu/detekt-extensions</url>
         <connection>scm:git:git://github.com/drop-project-edu/detekt-extensions.git</connection>
@@ -91,16 +99,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- since javadoc doesn't work with kotlin, I have to fake javadoc jar
+            (https://discuss.kotlinlang.org/t/generating-javadocs-kdocs-with-maven/839) -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <id>attach-javadocs</id>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>attach-artifact</goal>
                         </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>drop-project-detekt-extensions-${project.version}-javadoc.jar</file>
+                                    <type>jar</type>
+                                    <classifier>javadoc</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
