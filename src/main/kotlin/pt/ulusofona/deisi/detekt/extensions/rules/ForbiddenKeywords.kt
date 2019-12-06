@@ -1,7 +1,13 @@
 package pt.ulusofona.deisi.detekt.extensions.rules
 
 import io.gitlab.arturbosch.detekt.api.*
+import org.jetbrains.kotlin.com.intellij.psi.PsiComment
 import org.jetbrains.kotlin.com.intellij.psi.PsiElement
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
+import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.PsiCoreCommentImpl
+import org.jetbrains.kotlin.psi.KtBlockExpression
+import org.jetbrains.kotlin.psi.KtFile
+import org.jetbrains.kotlin.psi.KtNamedFunction
 
 class ForbiddenKeywords(config: Config = Config.empty) : Rule(config) {
 
@@ -12,13 +18,18 @@ class ForbiddenKeywords(config: Config = Config.empty) : Rule(config) {
             Debt.TWENTY_MINS
     )
 
-    private val forbiddenKeywords = SplitPattern(valueOrDefault(FORBIDDEN_KEYWORDS, ""))
+    private val forbiddenKeywords = valueOrDefault(FORBIDDEN_KEYWORDS, "").split(",")
 
     override fun visitElement(element: PsiElement) {
         super.visitElement(element)
 
-        if (forbiddenKeywords.contains(element.text)) {
+        if (element is LeafPsiElement &&
+                element !is PsiCoreCommentImpl &&
+                forbiddenKeywords.contains(element.text)) {
+
+            // println(">>>>>${element.text} - ${element.javaClass.simpleName}")
             report(CodeSmell(issue, Entity.from(element), "${element.text} is forbidden"))
+
         }
     }
 
