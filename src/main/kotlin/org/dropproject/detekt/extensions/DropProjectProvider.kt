@@ -1,9 +1,9 @@
-package pt.ulusofona.deisi.detekt.extensions
+package org.dropproject.detekt.extensions
 
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
-import pt.ulusofona.deisi.detekt.extensions.rules.ForbiddenKeywords
+import org.dropproject.detekt.extensions.rules.ForbiddenKeywords
 
 class DropProjectProvider : RuleSetProvider {
 

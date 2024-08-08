@@ -10,9 +10,9 @@ Current rules include:
 Include the following dependency on your pom file:
 
     <dependency>
-	    <groupId>pt.ulusofona.deisi</groupId>
+	    <groupId>org.dropproject</groupId>
 	    <artifactId>drop-project-detekt-extensions</artifactId>
-	    <version>0.1.2</version>
+	    <version>0.2.0</version>
 	</dependency>
 	
 Add this configuration to detekt.yml:
