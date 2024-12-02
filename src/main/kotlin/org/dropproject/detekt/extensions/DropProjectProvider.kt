@@ -4,6 +4,7 @@ import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
 import org.dropproject.detekt.extensions.rules.ForbiddenKeywords
+import org.dropproject.detekt.extensions.rules.GlobalVariables
 
 class DropProjectProvider : RuleSetProvider {
 
@@ -12,7 +13,8 @@ class DropProjectProvider : RuleSetProvider {
     override fun instance(config: Config): RuleSet = RuleSet(
             ruleSetId,
             listOf(
-                    ForbiddenKeywords(config)
+                    ForbiddenKeywords(config),
+                    GlobalVariables(config)
             )
     )
 }
